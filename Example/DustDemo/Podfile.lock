@@ -1,0 +1,16 @@
+PODS:
+  - Dust (0.1.0)
+
+DEPENDENCIES:
+  - Dust (from `../../`)
+
+EXTERNAL SOURCES:
+  Dust:
+    :path: "../../"
+
+SPEC CHECKSUMS:
+  Dust: 36c6ca9db32c6a49fef4f5652ad056f3ddd63834
+
+PODFILE CHECKSUM: 174f525103dab9b646ddb487964d94f0d8e10982
+
+COCOAPODS: 1.0.1
