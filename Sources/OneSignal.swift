@@ -13,11 +13,15 @@ public struct OneSignal {
 
   public static var appID: String = ""
 
-  public static func updateBadge(count: Int) {
+  public static func handleBadge(count: Int) {
 
   }
 
   public static func handleDeviceToken(data: NSData) {
+    
+  }
+
+  public static func registerUser() {
     
   }
 }
