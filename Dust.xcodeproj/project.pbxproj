@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D2D434DD1D6E483F000B0600 /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D434DC1D6E483F000B0600 /* UserDefaults.swift */; };
+		D2D434DE1D6E483F000B0600 /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D434DC1D6E483F000B0600 /* UserDefaults.swift */; };
 		D2D51ED21D6CFE77009646A6 /* Dust.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D51ED11D6CFE77009646A6 /* Dust.swift */; };
 		D2D51ED31D6CFE77009646A6 /* Dust.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D51ED11D6CFE77009646A6 /* Dust.swift */; };
 		D2D51ED51D6CFE8D009646A6 /* Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D51ED41D6CFE8D009646A6 /* Tests.swift */; };
@@ -33,6 +35,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		D2D434DC1D6E483F000B0600 /* UserDefaults.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDefaults.swift; sourceTree = "<group>"; };
 		D2D51ED11D6CFE77009646A6 /* Dust.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Dust.swift; sourceTree = "<group>"; };
 		D2D51ED41D6CFE8D009646A6 /* Tests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tests.swift; sourceTree = "<group>"; };
 		D500FD111C3AABED00782D78 /* Playground-iOS.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = "Playground-iOS.playground"; sourceTree = "<group>"; };
@@ -117,6 +120,7 @@
 			isa = PBXGroup;
 			children = (
 				D2D51ED11D6CFE77009646A6 /* Dust.swift */,
+				D2D434DC1D6E483F000B0600 /* UserDefaults.swift */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -303,6 +307,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D2D434DD1D6E483F000B0600 /* UserDefaults.swift in Sources */,
 				D2D51ED21D6CFE77009646A6 /* Dust.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -319,6 +324,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D2D434DE1D6E483F000B0600 /* UserDefaults.swift in Sources */,
 				D2D51ED31D6CFE77009646A6 /* Dust.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
