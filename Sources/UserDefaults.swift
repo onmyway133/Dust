@@ -12,6 +12,7 @@ struct UserDefaults {
 
   struct Key {
     static let playerID: String = "Dust-OneSignal-Player-ID-Key"
+    static let deviceToken: String = "Dust-OneSignal-Device-Token-Key"
   }
 
   var playerID: String? {
@@ -21,6 +22,17 @@ struct UserDefaults {
 
     set {
       NSUserDefaults.standardUserDefaults().setObject(newValue, forKey: Key.playerID)
+      NSUserDefaults.standardUserDefaults().synchronize()
+    }
+  }
+
+  var deviceToken: String? {
+    get {
+      return NSUserDefaults.standardUserDefaults().stringForKey(Key.deviceToken)
+    }
+
+    set {
+      NSUserDefaults.standardUserDefaults().setObject(newValue, forKey: Key.deviceToken)
       NSUserDefaults.standardUserDefaults().synchronize()
     }
   }
