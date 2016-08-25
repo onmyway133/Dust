@@ -19,6 +19,7 @@
 		D2D51ED31D6CFE77009646A6 /* Dust.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D51ED11D6CFE77009646A6 /* Dust.swift */; };
 		D2D51ED51D6CFE8D009646A6 /* Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D51ED41D6CFE8D009646A6 /* Tests.swift */; };
 		D2D51ED61D6CFE8D009646A6 /* Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D51ED41D6CFE8D009646A6 /* Tests.swift */; };
+		D2E0BA421D6F82A900F877B4 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2D434E51D6E4F17000B0600 /* Alamofire.framework */; };
 		D5B2E8AA1C3A780C00C0327D /* Dust.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5B2E89F1C3A780C00C0327D /* Dust.framework */; };
 		D5C6294A1C3A7FAA007F7B7C /* Dust.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5C629401C3A7FAA007F7B7C /* Dust.framework */; };
 /* End PBXBuildFile section */
@@ -73,6 +74,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D2E0BA421D6F82A900F877B4 /* Alamofire.framework in Frameworks */,
 				D5B2E8AA1C3A780C00C0327D /* Dust.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -524,7 +526,7 @@
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/DustTests/Info-iOS.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks $(FRAMEWORK_SEARCH_PATHS)";
 				PRODUCT_BUNDLE_IDENTIFIER = no.hyper.DustTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -540,7 +542,7 @@
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/DustTests/Info-iOS.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks $(FRAMEWORK_SEARCH_PATHS)";
 				PRODUCT_BUNDLE_IDENTIFIER = no.hyper.DustTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
