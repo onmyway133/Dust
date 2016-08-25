@@ -8,14 +8,15 @@
 
 import Foundation
 
-struct UserDefaults {
+public struct UserDefaults {
 
   struct Key {
     static let playerID: String = "Dust-OneSignal-Player-ID-Key"
     static let deviceToken: String = "Dust-OneSignal-Device-Token-Key"
+    static let disableSubscription: String = "Dust-OneSignal-Disable-Subscription-Key"
   }
 
-  static var playerID: String? {
+  public static var playerID: String? {
     get {
       return NSUserDefaults.standardUserDefaults().stringForKey(Key.playerID)
     }
@@ -26,13 +27,24 @@ struct UserDefaults {
     }
   }
 
-  static var deviceToken: String? {
+  public static var deviceToken: String? {
     get {
       return NSUserDefaults.standardUserDefaults().stringForKey(Key.deviceToken)
     }
 
     set {
       NSUserDefaults.standardUserDefaults().setObject(newValue, forKey: Key.deviceToken)
+      NSUserDefaults.standardUserDefaults().synchronize()
+    }
+  }
+
+  public static var disableSubscription: Bool {
+    get {
+      return NSUserDefaults.standardUserDefaults().boolForKey(Key.disableSubscription)
+    }
+
+    set {
+      NSUserDefaults.standardUserDefaults().setBool(newValue, forKey: Key.disableSubscription)
       NSUserDefaults.standardUserDefaults().synchronize()
     }
   }

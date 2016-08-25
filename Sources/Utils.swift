@@ -6,7 +6,7 @@
 //  Copyright © 2016 Khoa Pham. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 struct Utils {
 
@@ -44,8 +44,8 @@ struct Utils {
     return NSLocale.preferredLanguages().first!
   }
 
-  static func timezone() -> NSNumber {
-    return NSNumber(integer: NSTimeZone.localTimeZone().secondsFromGMT)
+  static func timezone() -> Int {
+    return NSTimeZone.localTimeZone().secondsFromGMT
   }
 
   static func soundFiles() -> [String] {
@@ -59,5 +59,22 @@ struct Utils {
       }
 
     return files ?? []
+  }
+
+  static func netType() -> Int {
+    // Reachability
+    return 0
+  }
+
+  static func notificationTypes() -> Int {
+    if UserDefaults.disableSubscription {
+      return -2
+    }
+
+    if UserDefaults.deviceToken != nil {
+      return Int(UIApplication.sharedApplication().currentUserNotificationSettings()?.types.rawValue ?? 0)
+    }
+
+    return -1
   }
 }
