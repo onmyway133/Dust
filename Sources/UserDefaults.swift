@@ -15,7 +15,7 @@ struct UserDefaults {
     static let deviceToken: String = "Dust-OneSignal-Device-Token-Key"
   }
 
-  var playerID: String? {
+  static var playerID: String? {
     get {
       return NSUserDefaults.standardUserDefaults().stringForKey(Key.playerID)
     }
@@ -26,7 +26,7 @@ struct UserDefaults {
     }
   }
 
-  var deviceToken: String? {
+  static var deviceToken: String? {
     get {
       return NSUserDefaults.standardUserDefaults().stringForKey(Key.deviceToken)
     }
