@@ -25,7 +25,7 @@ public struct OneSignal {
     registerUser()
   }
 
-  public static func registerUser(completion: ((String?) -> Void)?) {
+  public static func registerUser(completion: ((String?) -> Void)? = nil) {
     let params: [String: AnyObject] = [
       "app_id" : appID,
       "device_model" : Utils.deviceModel(),
