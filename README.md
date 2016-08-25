@@ -9,7 +9,14 @@ Unofficial, simple push notification
 
 ![](Screenshots/Banner.png)
 
-The official SDKs do many things. `Dust` does only one thing, which is push notification handling, the rest is under your control
+The official SDKs do many things
+
+- Register device token. This is crucial for the notification to get from `your backend -> APNS -> device`
+- Manage player id, user id, arn, ...This is used to associate with device token
+- Manager tag, topic, subscription, segments, ...This is used to group a set of device tokens
+- Do swizzling, update your application badge number, change your user notification settings, ... without your knowing about that
+
+`Dust` does only one thing, which is push notification handling. The rest is under your control
 
 ### OneSignal
 
@@ -19,7 +26,7 @@ func application(application: UIApplication, didFinishLaunchingWithOptions launc
 }
 
 func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {
-    OneSignal.handleDeviceToken(data)
+  OneSignal.handleDeviceToken(data)
 }
 ```
 
