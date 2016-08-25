@@ -1,4 +1,5 @@
 # Dust
+Unofficial, simple push notification
 
 [![CI Status](http://img.shields.io/travis/onmyway133/Dust.svg?style=flat)](https://travis-ci.org/onmyway133/Dust)
 [![Version](https://img.shields.io/cocoapods/v/Dust.svg?style=flat)](http://cocoadocs.org/docsets/Dust)
@@ -6,15 +7,25 @@
 [![License](https://img.shields.io/cocoapods/l/Dust.svg?style=flat)](http://cocoadocs.org/docsets/Dust)
 [![Platform](https://img.shields.io/cocoapods/p/Dust.svg?style=flat)](http://cocoadocs.org/docsets/Dust)
 
-## Description
+![](Screenshots/Banner.png)
 
-**Dust** description.
+The official SDKs do many things. `Dust` does only one thing, which is push notification handling, the rest is under your control
 
-## Usage
+### OneSignal
 
 ```swift
-<API>
+func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject : AnyObject]?) -> Bool {
+  OneSignal.appID = ""
+}
+
+func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {
+    OneSignal.handleDeviceToken(data)
+}
 ```
+
+### Urban Airship
+### Amazon SNS
+### Firebase Notifications
 
 ## Installation
 

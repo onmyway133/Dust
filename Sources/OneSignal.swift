@@ -22,9 +22,10 @@ public struct OneSignal {
 
   public static func handleDeviceToken(data: NSData) {
     UserDefaults.deviceToken = Utils.parseDeviceToken(data)
+    registerUser()
   }
 
-  public static func registerUser(completion: ((String?) -> Void)) {
+  public static func registerUser(completion: ((String?) -> Void)?) {
     let params: [String: AnyObject] = [
       "app_id" : appID,
       "device_model" : Utils.deviceModel(),
@@ -57,12 +58,12 @@ public struct OneSignal {
         guard let json = response.result.value as? [String: AnyObject],
           id = json["id"] as? String
           else {
-            completion(nil)
+            completion?(nil)
             return
         }
 
         UserDefaults.playerID = id
-        completion(id)
+        completion?(id)
       }
   }
 }

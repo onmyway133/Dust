@@ -9,7 +9,7 @@
 import XCTest
 import Dust
 
-class Tests: XCTestCase {
+class Tests: XCTestCase, UIApplicationDelegate {
 
   override func setUp() {
     super.setUp()
@@ -27,5 +27,4 @@ class Tests: XCTestCase {
 
     self.waitForExpectationsWithTimeout(5.0, handler: nil)
   }
-
 }
