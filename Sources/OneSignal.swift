@@ -25,6 +25,10 @@ public struct OneSignal {
     }
   }
 
+  enum Provisioning: Int {
+    case development = 1
+  }
+
   public static func setup(appID appID: String) {
     NSUserDefaults.standardUserDefaults().registerDefaults([
       UserDefaults.Key.subscribed: true
@@ -40,7 +44,7 @@ public struct OneSignal {
       return
     }
 
-    let params: [String: AnyObject] = [
+    var params: [String: AnyObject] = [
       "app_id" : appID,
       "device_model" : Utils.deviceModel(),
       "device_os" : Utils.systemVersion(),
@@ -58,6 +62,10 @@ public struct OneSignal {
       "game_version": Utils.versionNumber() ?? "",
       "notification_types": NotificationType.value(),
     ]
+
+    #if COCOAPODS
+      params["test_type"] = Provisioning.development.rawValue
+    #endif
 
     let url: NSURL
 
