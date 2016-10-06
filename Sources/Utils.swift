@@ -10,7 +10,7 @@ import UIKit
 
 struct Utils {
 
-  static func parseDeviceToken(data: NSData) -> String {
+  static func parse(deviceToken data: NSData) -> String {
     let buffer = UnsafePointer<CChar>(data.bytes)
     var string = ""
 
@@ -61,20 +61,16 @@ struct Utils {
     return files ?? []
   }
 
+  static func versionNumber() -> String? {
+    return NSBundle.mainBundle().infoDictionary?["CFBundleShortVersionString"] as? String
+  }
+
+  static func buildNumber() -> String? {
+    return NSBundle.mainBundle().infoDictionary?["CFBundleVersionString"] as? String
+  }
+
   static func netType() -> Int {
     // Reachability
     return 0
-  }
-
-  static func notificationTypes() -> Int {
-    if UserDefaults.disableSubscription {
-      return -2
-    }
-
-    if UserDefaults.deviceToken != nil {
-      return Int(UIApplication.sharedApplication().currentUserNotificationSettings()?.types.rawValue ?? 0)
-    }
-
-    return -1
   }
 }

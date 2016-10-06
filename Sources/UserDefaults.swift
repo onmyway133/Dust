@@ -13,7 +13,7 @@ public struct UserDefaults {
   struct Key {
     static let playerID: String = "Dust-OneSignal-Player-ID-Key"
     static let deviceToken: String = "Dust-OneSignal-Device-Token-Key"
-    static let disableSubscription: String = "Dust-OneSignal-Disable-Subscription-Key"
+    static let subscribed: String = "Dust-OneSignal-Disable-Subscribed-Key"
   }
 
   public static var playerID: String? {
@@ -38,13 +38,13 @@ public struct UserDefaults {
     }
   }
 
-  public static var disableSubscription: Bool {
+  public static var subscribed: Bool {
     get {
-      return NSUserDefaults.standardUserDefaults().boolForKey(Key.disableSubscription)
+      return NSUserDefaults.standardUserDefaults().boolForKey(Key.subscribed)
     }
 
     set {
-      NSUserDefaults.standardUserDefaults().setBool(newValue, forKey: Key.disableSubscription)
+      NSUserDefaults.standardUserDefaults().setBool(newValue, forKey: Key.subscribed)
       NSUserDefaults.standardUserDefaults().synchronize()
     }
   }

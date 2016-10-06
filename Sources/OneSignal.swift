@@ -11,21 +11,35 @@ import Alamofire
 
 public struct OneSignal {
 
-  public static var appID: String = ""
-
-  static let version = "011303"
+  static var appID: String = ""
+  static let version = "020115"
   static let baseURL = NSURL(string: "https://onesignal.com/api/v1")!
 
-  public static func handleBadge(count: Int) {
+  enum NotificationType: Int {
+    case subscribed = 7
+    case unsubscribed = -2
 
+    static func value() -> Int {
+      return UserDefaults.subscribed
+        ? NotificationType.subscribed.rawValue : NotificationType.unsubscribed.rawValue
+    }
   }
 
-  public static func handleDeviceToken(data: NSData) {
-    UserDefaults.deviceToken = Utils.parseDeviceToken(data)
-    registerUser()
+  public static func setup(appID appID: String) {
+    NSUserDefaults.standardUserDefaults().registerDefaults([
+      UserDefaults.Key.subscribed: true
+    ])
+
+    OneSignal.appID = appID
   }
 
-  public static func registerUser(completion: ((String?) -> Void)? = nil) {
+  public static func registerOrUpdateSession(completion: ((String?) -> Void)? = nil) {
+    guard let bundleID = NSBundle.mainBundle().bundleIdentifier,
+      let deviceToken = UserDefaults.deviceToken
+    else {
+      return
+    }
+
     let params: [String: AnyObject] = [
       "app_id" : appID,
       "device_model" : Utils.deviceModel(),
@@ -35,13 +49,14 @@ public struct OneSignal {
       "device_type" : NSNumber(integer : 0),
       "sounds" : Utils.soundFiles(),
       "sdk" : version,
-      "identifier" : UserDefaults.deviceToken ?? "",
+      "identifier" : deviceToken,
       "net_type" : NSNumber(integer: Utils.netType()),
       "rooted": NSNumber(bool: false),
       "as_id": "OptedOut",
       "sdk_type": "native",
-      "ios_bundle": NSBundle.mainBundle().bundleIdentifier ?? "",
-      "notification_types": NSNumber(integer: 0)
+      "ios_bundle": bundleID,
+      "game_version": Utils.versionNumber() ?? "",
+      "notification_types": NotificationType.value(),
     ]
 
     let url: NSURL
@@ -53,17 +68,74 @@ public struct OneSignal {
     }
 
     Alamofire
-      .request(.POST, url, parameters: params)
-      .responseJSON { response in
-        guard let json = response.result.value as? [String: AnyObject],
-          id = json["id"] as? String
-          else {
-            completion?(nil)
-            return
-        }
+    .request(.POST, url, parameters: params)
+    .responseJSON { response in
+      guard let json = response.result.value as? [String: AnyObject]
+      else {
+        completion?(nil)
+        return
+      }
 
+      if let id = json["id"] as? String {
         UserDefaults.playerID = id
         completion?(id)
+      } else if let value = json["success"] as? Int,
+        playerID = UserDefaults.playerID where value == 1 {
+        completion?(playerID)
+      } else {
+        completion?(nil)
       }
+    }
+  }
+
+  public static func handle(deviceToken data: NSData) {
+    UserDefaults.deviceToken = Utils.parse(deviceToken: data)
+    registerOrUpdateSession()
+  }
+
+  public static func update(subscription subscribed: Bool) {
+    guard let playerID = UserDefaults.playerID else { return }
+    UserDefaults.subscribed = subscribed
+
+    let url = baseURL.URLByAppendingPathComponent("players/\(playerID)")
+    let params: [String: AnyObject] = [
+      "app_id": appID,
+      "notification_types": NotificationType.value()
+    ]
+
+    Alamofire
+    .request(.PUT, url, parameters: params)
+    .responseJSON { response in
+      print(response)
+    }
+  }
+
+  public static func update(badge count: Int) {
+    guard let playerID = UserDefaults.playerID else { return }
+
+    let url = baseURL.URLByAppendingPathComponent("players/\(playerID)")
+    let params: [String: AnyObject] = [
+      "app_id": appID,
+      "badge_count": count
+    ]
+
+    Alamofire
+      .request(.PUT, url, parameters: params)
+      .responseJSON { response in
+
+    }
+  }
+
+  public static func getPlayerID(completion: String -> Void) {
+    if let playerID = UserDefaults.playerID {
+      completion(playerID)
+      return
+    }
+
+    registerOrUpdateSession { playerID in
+      if let playerID = playerID {
+        completion(playerID)
+      }
+    }
   }
 }
