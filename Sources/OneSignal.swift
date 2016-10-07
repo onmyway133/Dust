@@ -63,7 +63,7 @@ public struct OneSignal {
       "notification_types": NotificationType.value(),
     ]
 
-    #if COCOAPODS
+    #if DEBUG
       params["test_type"] = Provisioning.development.rawValue
     #endif
 
